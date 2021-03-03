@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <Header>
-      <router-link to="/register">register</router-link> |
-      <router-link to="/login">login</router-link>
-    </Header>
+    <Header />
     <Layout :background="isAuth ? '' : background">
       <router-view />
     </Layout>
