@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import store from "../store/index";
+import store from "../store/index";
 
 Vue.use(VueRouter);
 
@@ -65,20 +65,19 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
-// router.beforeEach((to, from, next) => {
-//   const isLoggedIn = store.getters["user/isAuth"];
-//   console.log(isLoggedIn);
-//   if (to.matched.some(record => record.meta.requiresAuth)) {
-//     if (!isLoggedIn) {
-//       next({ name: "Login" });
-//     }
-//   }
-//   if (to.matched.some(record => record.meta.hideForAuth)) {
-//     if (isLoggedIn) {
-//       next({ name: "Home" });
-//     }
-//   }
-//   next();
-// });
+router.beforeEach((to, from, next) => {
+  const isLoggedIn = store.getters["user/isAuth"];
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!isLoggedIn) {
+      next({ name: "Login" });
+    }
+  }
+  if (to.matched.some(record => record.meta.hideForAuth)) {
+    if (isLoggedIn) {
+      next({ name: "Home" });
+    }
+  }
+  next();
+});
 
 export default router;

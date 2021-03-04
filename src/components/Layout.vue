@@ -25,7 +25,8 @@ export default {
   height: 100%;
 }
 .content {
-  max-width: 1110px;
+  max-width: 1150px;
+  padding: 0 20px;
   margin: 0 auto;
   width: 100%;
   height: 100%;

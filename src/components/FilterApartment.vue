@@ -33,6 +33,7 @@ export default {
     }
   },
   data: () => ({
+    range: 0,
     city: "",
     price: 0,
     title: "No search query",

@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <notifications width="30%" />
     <Header />
     <Layout :background="isAuth ? '' : background">
       <router-view />
@@ -35,5 +36,10 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.notification {
+  width: 100%;
+  height: 100%;
+  font-size: 30px;
 }
 </style>

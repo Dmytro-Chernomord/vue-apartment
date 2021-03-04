@@ -24,9 +24,19 @@ export default {
     async submitForm(req) {
       try {
         const { data } = await axios.post("/users/login", req);
+        this.$notify({
+          title: "Congratulations",
+          text: "You successfully loged",
+          type: "success"
+        });
         this.setToken(data.token);
+        this.$router.push("/");
         return true;
       } catch (error) {
+        this.$notify({
+          title: "Password or Email is incorrect",
+          type: "error"
+        });
         console.log(error);
       }
     }

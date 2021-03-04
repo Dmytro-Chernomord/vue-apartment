@@ -27,10 +27,22 @@ export default {
       try {
         delete req["confirm password"];
         const { data } = await axios.post("/users/register", req);
+        this.$notify({
+          title: "Congratulations",
+          text: "You successfully registered",
+          type: "success"
+        });
         this.setToken(data.token);
+        this.$router.push("/");
+
         return true;
       } catch (error) {
-        console.log(error);
+        this.$notify({
+          title: "Password or Email is incorrect",
+          // text: error.message,
+          type: "error"
+        });
+        console.dir(error);
       }
     }
   }
