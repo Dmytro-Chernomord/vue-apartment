@@ -8,7 +8,7 @@
           <router-link to="/register">register</router-link>
           <router-link to="/login">login</router-link>
         </template>
-        <template>
+        <template v-else>
           <router-link to="/">home</router-link>
           <img class="user-logo" :src="user" alt="user logo" />
           <span class="profile">Profile</span>\
