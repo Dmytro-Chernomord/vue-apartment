@@ -48,10 +48,10 @@ export default {
   margin: 0 3px;
   flex-shrink: 0;
   &--colored {
-    background: url("../assets/images/Star.svg") center no-repeat;
+    background: url("../../assets/images/Star.svg") center no-repeat;
   }
   &--outline {
-    background: url("../assets/images/Star2.svg") center no-repeat;
+    background: url("../../assets/images/Star2.svg") center no-repeat;
     /* background-color: red; */
   }
 }

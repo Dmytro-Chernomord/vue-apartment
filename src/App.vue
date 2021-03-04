@@ -4,6 +4,7 @@
     <Layout :background="isAuth ? '' : background">
       <router-view />
     </Layout>
+    <!-- <Home /> -->
     <Footer />
   </div>
 </template>
@@ -13,12 +14,19 @@ import Layout from "./components/Layout";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import background from "./assets/images/Background.jpg";
+import { mapGetters } from "vuex";
+// import Home from "./views/Home.vue";
 export default {
   data: () => ({
-    isAuth: false,
+    ...mapGetters("user", ["isAuth"]),
     background
   }),
-  components: { Layout, Header, Footer }
+  components: {
+    Layout,
+    Header,
+    Footer
+    // Home
+  }
 };
 </script>
 

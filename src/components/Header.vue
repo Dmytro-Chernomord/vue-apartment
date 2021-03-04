@@ -1,11 +1,12 @@
 <template>
   <div class="header">
     <header class="header-container">
-      <img :src="logo" alt="logo" />
+      <router-link to="/"><img :src="logo" alt="logo"/></router-link>
       <slot></slot>
       <div class="links">
         <router-link to="/register">register</router-link>
         <router-link to="/login">login</router-link>
+        <router-link to="/">home</router-link>
       </div>
     </header>
   </div>
@@ -31,9 +32,10 @@ export default {
   max-width: 1110px;
   margin: 0 auto;
 }
-.links > a {
+.links a {
   margin-left: 20px;
   font-size: 1.2em;
+  text-transform: capitalize;
   /* color: #fff; */
 }
 /* .links > a.router-link-exact-active {

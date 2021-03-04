@@ -53,11 +53,15 @@ export default {
 .auth-container {
   background-color: #fff;
   padding: 20px;
-  /* height: 270px; */
-  width: 410px;
+  @media screen and (min-width: 767px) {
+    width: 50%;
+  }
   margin: auto;
+  border: 1px solid #000000;
+  box-shadow: 1px 1px 20px rgba(#000000, 0.8);
   &-header {
     text-align: center;
+    text-transform: capitalize;
   }
   &-form {
     display: flex;
@@ -68,14 +72,29 @@ export default {
   }
   &-form > input {
     width: 100%;
+    font-size: 18px;
     margin-top: 20px;
-    padding: 5px;
+    font-weight: 500;
+    padding: 10px 0;
     text-align: center;
+    border: 1px solid orange;
+  }
+
+  &-form > input::placeholder {
+    color: #000000;
   }
   &-btn {
     padding: 11px 0;
     margin: 15px;
     width: 100%;
+    background: orange;
+    color: #fff;
+    border: 1px solid orange;
+    transition: all 300ms;
+  }
+  &-btn:hover {
+    background: #fff;
+    color: orange;
   }
 }
 </style>

@@ -3,6 +3,9 @@ export default {
   state: {
     token: null
   },
+  getters: {
+    isAuth: ({ token }) => token
+  },
   mutations: {
     SET_TOKEN(state, token) {
       state.token = token;
