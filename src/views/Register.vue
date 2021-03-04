@@ -9,7 +9,6 @@
 // import AuthContainer from "../components/shared/AuthContainer";
 import CustomForm from "../components/shared/CustomForm.vue";
 import { mapActions } from "vuex";
-import axios from "../utils/axios";
 export default {
   name: "Register",
   components: { CustomForm },
@@ -22,27 +21,22 @@ export default {
     ]
   }),
   methods: {
-    ...mapActions("user", ["setToken"]),
+    ...mapActions("user", ["register"]),
     async submitForm(req) {
       try {
         delete req["confirm password"];
-        const { data } = await axios.post("/users/register", req);
+        await this.register(req);
         this.$notify({
           title: "Congratulations",
           text: "You successfully registered",
           type: "success"
         });
-        this.setToken(data.token);
         this.$router.push("/");
-
-        return true;
       } catch (error) {
         this.$notify({
           title: "Password or Email is incorrect",
-          // text: error.message,
           type: "error"
         });
-        console.dir(error);
       }
     }
   }

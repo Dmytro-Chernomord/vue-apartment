@@ -6,7 +6,7 @@
       <div class="links">
         <template v-if="!logged">
           <router-link to="/register">register</router-link>
-          <router-link to="/login">login</router-link>
+          <router-link to="/login">Login</router-link>
         </template>
         <template v-else>
           <router-link to="/">home</router-link>

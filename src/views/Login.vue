@@ -8,7 +8,7 @@
 <script>
 // import AuthContainer from "../components/shared/AuthContainer";
 import CustomForm from "../components/shared/CustomForm.vue";
-import axios from "../utils/axios";
+// import axios from "../utils/axios";
 import { mapActions } from "vuex";
 export default {
   name: "Login",
@@ -20,16 +20,15 @@ export default {
     ]
   }),
   methods: {
-    ...mapActions("user", ["setToken"]),
+    ...mapActions("user", ["login"]),
     async submitForm(req) {
       try {
-        const { data } = await axios.post("/users/login", req);
+        await this.login(req);
         this.$notify({
           title: "Congratulations",
           text: "You successfully loged",
           type: "success"
         });
-        this.setToken(data.token);
         this.$router.push("/");
         return true;
       } catch (error) {

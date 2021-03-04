@@ -24,6 +24,26 @@ export default {
       } catch (error) {
         throw new Error(error);
       }
+    },
+    async register({ commit }, req) {
+      try {
+        const { data } = await axios.post("/users/register", req);
+        commit("SET_TOKEN", data.token);
+
+        return true;
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+    async login({ commit }, req) {
+      try {
+        const { data } = await axios.post("/users/login", req);
+        commit("SET_TOKEN", data.token);
+
+        return true;
+      } catch (error) {
+        throw new Error(error);
+      }
     }
   }
 };
