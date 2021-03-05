@@ -44,7 +44,6 @@ export default {
     ...mapActions("user", ["logout"]),
     async handlerLogout() {
       try {
-        console.log("logout");
         await this.logout();
         this.$router.push("/login");
       } catch (error) {

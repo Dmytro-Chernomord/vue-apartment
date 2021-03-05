@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import user from "./user";
 import apartments from "./apartments";
+import loader from "./loader";
 import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex);
 const persistedState = new createPersistedState({
@@ -11,6 +12,6 @@ export default new Vuex.Store({
   state: {},
   mutations: {},
   actions: {},
-  modules: { user, apartments },
+  modules: { user, apartments, loader },
   plugins: [persistedState]
 });

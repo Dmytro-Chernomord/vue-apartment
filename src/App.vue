@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Loader v-if="load" />
     <notifications width="30%" />
     <Header />
     <Layout :background="isAuth ? '' : background">
@@ -16,16 +17,29 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import background from "./assets/images/Background.jpg";
 import { mapGetters } from "vuex";
+import Loader from "./components/shared/Loader.vue";
 // import Home from "./views/Home.vue";
 export default {
   data: () => ({
-    ...mapGetters("user", ["isAuth"]),
     background
   }),
+  computed: {
+    load() {
+      if (this.isLoading) {
+        document.documentElement.style.overflow = "hidden";
+        return true;
+      }
+      document.documentElement.style.overflow = "auto";
+      return false;
+    },
+    ...mapGetters("loader", ["isLoading"]),
+    ...mapGetters("user", ["isAuth"])
+  },
   components: {
     Layout,
     Header,
-    Footer
+    Footer,
+    Loader
     // Home
   }
 };

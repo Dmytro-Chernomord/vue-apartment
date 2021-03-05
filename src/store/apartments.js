@@ -8,13 +8,13 @@ export default {
     filteredApartments: [],
     search: {
       city: "",
-      price: 300
+      price: 0
     }
   },
   getters: {
-    // getApartments: state => {
-    //   return state.apartments;
-    // },
+    getFilters: state => {
+      return state.search;
+    },
     getApartments: state => {
       const { city, price } = state.search;
       if (!city && !price) {
@@ -22,15 +22,17 @@ export default {
       }
       if (city && price) {
         return state.apartments.filter(
-          el => el.price >= price && el.location.city === city
+          el => el.price <= price && el.location.city === city
         );
       }
-      if (city) {
-        return state.apartments.filter(el => el.location.city === city);
-      }
-      if (price) {
-        return state.apartments.filter(el => el.price >= price);
-      }
+      // if (city) {
+      return state.apartments.filter(
+        el => el.location.city === city || el.price <= price
+      );
+      // }
+      // if (price) {
+      //   return state.apartments.filter(el => el.price <= price);
+      // }
     },
     getCities: state => {
       return state.cities;
@@ -51,20 +53,42 @@ export default {
     setApartment({ commit }, apartments) {
       commit("SET_APARTMENTS", apartments);
     },
-    async fetchApartments({ commit }) {
-      const apartments = await axios.get("/apartments");
+    async fetchApartments({ commit, dispatch }) {
+      try {
+        dispatch("loader/setToken", true, { root: true });
 
-      commit("SET_APARTMENTS", apartments.data);
+        const apartments = await axios.get("/apartments");
+
+        commit("SET_APARTMENTS", apartments.data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        dispatch("loader/setToken", false, { root: true });
+      }
     },
-    async fetchOneApartment(_, id) {
-      const apartments = await axios.get(`/apartments/${id}`);
-
-      return apartments.data;
+    async fetchOneApartment({ dispatch }, id) {
+      try {
+        dispatch("loader/setToken", true, { root: true });
+        const apartments = await axios.get(`/apartments/${id}`);
+        return apartments.data;
+      } catch (error) {
+        console.log(error);
+      } finally {
+        dispatch("loader/setToken", false, { root: true });
+      }
     },
-    async fetchCities({ commit }) {
-      const cities = await axios.get(`/cities`);
+    async fetchCities({ commit, dispatch }) {
+      try {
+        dispatch("loader/setToken", true, { root: true });
 
-      commit("SET_CITIES", cities.data);
+        const cities = await axios.get(`/cities`);
+
+        commit("SET_CITIES", cities.data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        dispatch("loader/setToken", false, { root: true });
+      }
     },
     setFilter({ commit }, filterValue) {
       commit("SET_FILTER", filterValue);

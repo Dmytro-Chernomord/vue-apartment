@@ -1,5 +1,5 @@
 <template>
-  <div class="apartment">
+  <div v-if="Object.keys(this.apartment).length" class="apartment">
     <div class="apartment-title">
       <h1>{{ apartment.title }} {{ apartment.rating }}</h1>
       <StarRating :rating="apartment.rating" />
@@ -41,7 +41,7 @@ export default {
   components: { StarRating },
   name: "Apartment",
   data: () => ({
-    apartment: () => {}
+    apartment: {}
   }),
   computed: {
     priceToLocale() {
@@ -68,6 +68,7 @@ export default {
   flex-wrap: wrap;
   &-image {
     width: 70%;
+    height: 100%;
   }
   &-title {
     display: flex;
@@ -102,7 +103,6 @@ export default {
   }
   &-description {
     width: 70%;
-    /* padding-top: 30px; */
     font-size: 18px;
   }
 }

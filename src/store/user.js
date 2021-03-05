@@ -17,32 +17,43 @@ export default {
     setToken({ commit }, token) {
       commit("SET_TOKEN", token);
     },
-    async logout({ commit }) {
+    async logout({ commit, dispatch }) {
       try {
+        dispatch("loader/setToken", true, { root: true });
         await axios.post("/users/logout");
         commit("SET_TOKEN", null);
       } catch (error) {
         throw new Error(error);
+      } finally {
+        dispatch("loader/setToken", false, { root: true });
       }
     },
-    async register({ commit }, req) {
+    async register({ commit, dispatch }, req) {
       try {
+        dispatch("loader/setToken", true, { root: true });
+
         const { data } = await axios.post("/users/register", req);
         commit("SET_TOKEN", data.token);
 
         return true;
       } catch (error) {
         throw new Error(error);
+      } finally {
+        dispatch("loader/setToken", false, { root: true });
       }
     },
-    async login({ commit }, req) {
+    async login({ commit, dispatch }, req) {
       try {
+        dispatch("loader/setToken", true, { root: true });
+
         const { data } = await axios.post("/users/login", req);
         commit("SET_TOKEN", data.token);
 
         return true;
       } catch (error) {
         throw new Error(error);
+      } finally {
+        dispatch("loader/setToken", false, { root: true });
       }
     }
   }
