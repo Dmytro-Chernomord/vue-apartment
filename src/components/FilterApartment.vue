@@ -21,7 +21,7 @@
       </div>
       <CustomButtom type="submit" title="Filter" />
     </form>
-    <p>{{ title }}</p>
+    <!-- <p :style="title ? 'color:black;' : ''">Filter Result</p> -->
   </div>
 </template>
 
@@ -41,14 +41,25 @@ export default {
     range: 0,
     city: "",
     price: 0,
-    title: "No search query",
     apartments: () => [],
     close
   }),
   computed: {
-    ...mapGetters("apartments", ["getCities", "getFilters"]),
+    ...mapGetters("apartments", ["getCities", "getFilters", "getApartments"]),
     isFilter() {
       if (this.getFilters.price || this.getFilters.city) {
+        return true;
+      }
+      return false;
+    },
+    title() {
+      console.log(this.getFilters.city, this.getFilters.price, "getFilt");
+      console.log(this.getApartments.length, "getFilt");
+      if (
+        this.getFilters.city &&
+        this.getFilters.price &&
+        this.getApartments.length
+      ) {
         return true;
       }
       return false;
@@ -87,18 +98,14 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
   }
 }
 .filters {
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
   background-color: grey;
   border-radius: 10px;
   display: inline-block;
-  /* width: 130px; */
   padding: 10px 20px;
-  /* text-align: center; */
 }
 .filters > img {
   vertical-align: bottom;

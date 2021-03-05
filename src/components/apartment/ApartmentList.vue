@@ -1,5 +1,5 @@
 <template>
-  <div class="apartments-list">
+  <div v-if="items.length" class="apartments-list">
     <ApartmentsItem
       v-for="{ id, descr, price, rating, title, imgUrl } in items"
       :key="id"
@@ -11,11 +11,14 @@
       :imgSrc="imgUrl"
       class="apartments-list__item"
     />
+    {{ isLoading }}
   </div>
+  <h1 v-else-if="!isLoading">No Appartment</h1>
 </template>
 
 <script>
 import ApartmentsItem from "./ApartmentsItem";
+import { mapGetters } from "vuex";
 export default {
   name: "ApartmentList",
   components: {
@@ -27,8 +30,8 @@ export default {
       default: () => []
     }
   },
-  setup() {
-    return {};
+  computed: {
+    ...mapGetters("loader", ["isLoading"])
   }
 };
 </script>
