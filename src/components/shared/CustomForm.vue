@@ -88,7 +88,6 @@ export default {
       this.inputErrors[el.name] = "";
       this.inputValues[el.name] = "";
       if (el.name === "email") {
-        console.log(el.name);
         keys[el.name] = this.string()
           .required()
           .email();
