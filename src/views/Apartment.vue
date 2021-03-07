@@ -21,10 +21,18 @@
       <div class="apartment-price">Preis: {{ priceToLocale }}</div>
       <div class="apartment-reviews">
         <h3>Reviews:</h3>
-        <div v-if="apartment.reviews && apartment.reviews.length">
-          {{ apartment.reviews }}
-        </div>
-        <p v-else>Still no reviews</p>
+        <ul v-if="apartment.reviews && apartment.reviews.length">
+          <li
+            class="apartment-review"
+            v-for="el of apartment.reviews"
+            :key="el.id"
+          >
+            <!-- {{ apartment.reviews }} -->
+            <h4 class="author">{{ el.author }}</h4>
+            <p class="author">{{ el.content }}</p>
+          </li>
+        </ul>
+        <p v-else>No reviews</p>
       </div>
     </div>
     <div class="apartment-description">
@@ -104,6 +112,15 @@ export default {
   &-description {
     width: 70%;
     font-size: 18px;
+  }
+  &-review {
+    border: 1px solid green;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  &-review:last-child {
+    margin-bottom: 0;
   }
 }
 </style>
