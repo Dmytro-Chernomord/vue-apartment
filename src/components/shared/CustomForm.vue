@@ -21,7 +21,6 @@
 
 <script>
 import { object, string } from "yup";
-console.log(object);
 export default {
   name: "CustomForm",
   data: () => ({
@@ -65,15 +64,12 @@ export default {
             ...this.inputErrors,
             [err.params.path]: err.errors[0]
           };
-          // this.inputErrors[err.params.path] = err.errors[0];
-          // console.dir(err.errors[0]);
         });
     },
     async handlerSubmit() {
       const validateAll = this.inputs.map(el => this.validate(el.name));
       const result = await Promise.all(validateAll);
       const isAllValid = result.some(el => !el);
-      // const test = isAllValid.some(el => !el);
       if (!isAllValid) {
         const submitResult = await this.submit(this.inputValues);
         if (submitResult) {
@@ -93,9 +89,6 @@ export default {
           .email();
       } else keys[el.name] = this.string().required();
     });
-    // Object.keys(this.inputErrors).map(
-    //   el => (keys[el] = this.string().required())
-    // );
     this.loginFormSchema = object().shape(keys);
   }
 };
