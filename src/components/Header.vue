@@ -4,12 +4,14 @@
       <router-link to="/"><img :src="logo" alt="logo"/></router-link>
       <slot></slot>
       <div class="links">
+        <router-link to="/">Aparments</router-link>
         <template v-if="!logged">
-          <router-link to="/register">register</router-link>
+          <router-link to="/register">Register</router-link>
           <router-link to="/login">Login</router-link>
         </template>
         <template v-else>
-          <router-link to="/">home</router-link>
+          <router-link to="/orders">Orders</router-link>
+
           <img class="user-logo" :src="user" alt="user logo" />
           <span class="profile">Profile</span>\
           <CustomButtom

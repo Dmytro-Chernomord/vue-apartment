@@ -38,15 +38,21 @@
     <div class="apartment-description">
       <h2>Description</h2>
       <span class="apartment-description-text">{{ apartment.descr }}</span>
+      <CustomButtom
+        @click.native="bookAparment"
+        class="apartment-description-button"
+        title="Book Apartment"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions } from "vuex";
+import CustomButtom from "../components/shared/CustomButtom.vue";
 import StarRating from "../components/shared/StarRating.vue";
 export default {
-  components: { StarRating },
+  components: { StarRating, CustomButtom },
   name: "Apartment",
   data: () => ({
     apartment: {}
@@ -65,7 +71,12 @@ export default {
     this.apartment = apartment;
   },
   methods: {
-    ...mapActions("apartments", ["fetchOneApartment"])
+    bookAparment() {
+      console.log("book");
+      this.setModal("order");
+    },
+    ...mapActions("apartments", ["fetchOneApartment"]),
+    ...mapActions("modal", ["setModal"])
   }
 };
 </script>
@@ -112,6 +123,16 @@ export default {
   &-description {
     width: 70%;
     font-size: 18px;
+    &-text {
+      display: block;
+      margin-bottom: 20px;
+    }
+    &-button {
+      margin: auto;
+      display: flex;
+      padding: 10px 10px;
+      border-radius: 10px;
+    }
   }
   &-review {
     border: 1px solid green;

@@ -82,12 +82,5 @@ export default {
   justify-content: center;
   align-items: center;
   z-index: 999;
-  /* overflow: hidden; */
 }
-/* body {
-  height: 100vh;
-  width: 100vh;
-  position: relative;
-  overflow: hidden;
-} */
 </style>

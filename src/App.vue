@@ -1,12 +1,12 @@
 <template>
   <div id="app">
+    <ModalWindow v-if="isModal" />
     <Loader v-if="load" />
     <notifications width="30%" />
     <Header />
-    <Layout :background="isAuth ? '' : background">
+    <Layout :background="needBackground ? background : ''">
       <router-view />
     </Layout>
-    <!-- <Home /> -->
     <Footer />
   </div>
 </template>
@@ -18,8 +18,17 @@ import Footer from "./components/Footer";
 import background from "./assets/images/Background.jpg";
 import { mapGetters } from "vuex";
 import Loader from "./components/shared/Loader.vue";
-// import Home from "./views/Home.vue";
+import ModalWindow from "./components/shared/ModalWindow.vue";
 export default {
+  name: "App",
+  components: {
+    Layout,
+    Header,
+    Footer,
+    Loader,
+    ModalWindow
+    // Home
+  },
   data: () => ({
     background
   }),
@@ -32,15 +41,15 @@ export default {
       document.documentElement.style.overflow = "auto";
       return false;
     },
+    needBackground() {
+      if (this.$route.name === "Login" || this.$route.name === "Register") {
+        return true;
+      }
+      return false;
+    },
     ...mapGetters("loader", ["isLoading"]),
+    ...mapGetters("modal", ["isModal"]),
     ...mapGetters("user", ["isAuth"])
-  },
-  components: {
-    Layout,
-    Header,
-    Footer,
-    Loader
-    // Home
   }
 };
 </script>
