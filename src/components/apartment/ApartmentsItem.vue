@@ -1,7 +1,8 @@
 <template>
   <div class="apartments">
     <div class="apartments__inner">
-      <router-link :to="{ path: `apartment/${urlId}` }">
+      <router-link @click.native="notify" :to="{ path: `apartment/${urlId}` }">
+        <!-- <router-link @click.native="notify" :to="{ path: dinamicPath(urlId) }"> -->
         <img :src="imgSrc" alt="Apartment image" class="apartments__photo" />
         <div class="apartments__content">
           <p class="apartments__description">{{ descr }}</p>
@@ -17,6 +18,7 @@
 
 <script>
 import StarRating from "../shared/StarRating";
+import { mapGetters } from "vuex";
 export default {
   components: {
     StarRating
@@ -30,6 +32,7 @@ export default {
     urlId: { type: String, default: "" }
   },
   computed: {
+    ...mapGetters("user", ["isAuth"]),
     priceToLocale() {
       return Number(this.price).toLocaleString("de-DE", {
         style: "currency",
@@ -37,8 +40,22 @@ export default {
       });
     }
   },
-  setup() {
-    return {};
+  methods: {
+    // dinamicPath(id) {
+    //   if (this.isAuth) {
+    //     return `apartment/${id}`;
+    //   }
+
+    //   return `/login`;
+    // },
+    notify() {
+      if (!this.isAuth) {
+        this.$notify({
+          title: "Please login oder register",
+          type: "warn"
+        });
+      }
+    }
   }
 };
 </script>

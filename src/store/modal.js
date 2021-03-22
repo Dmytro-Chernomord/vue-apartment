@@ -1,19 +1,41 @@
-export default {
+// export default {
+//   namespaced: true,
+//   state: {
+//     modal: false
+//   },
+//   getters: {
+//     isModal: ({ modal }) => modal
+//   },
+//   mutations: {
+//     SET_MODAL(state, modal) {
+//       state.modal = modal;
+//     }
+//   },
+//   actions: {
+//     setModal({ commit }, modal) {
+//       commit("SET_MODAL", modal);
+//     }
+//   }
+// };
+
+const modalWindow = {
   namespaced: true,
   state: {
-    modal: false
+    showModal: false
   },
   getters: {
-    isModal: ({ modal }) => modal
+    isModal: ({ showModal }) => showModal
   },
   mutations: {
-    SET_MODAL(state, modal) {
-      state.modal = modal;
+    SET_MODAL_WINDOW(state, bool) {
+      state.showModal = bool;
     }
   },
   actions: {
-    setModal({ commit }, modal) {
-      commit("SET_MODAL", modal);
+    toggleModalWindow({ commit }, bool) {
+      commit("SET_MODAL_WINDOW", bool);
     }
   }
 };
+
+export default modalWindow;

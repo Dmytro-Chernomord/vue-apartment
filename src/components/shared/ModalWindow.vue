@@ -1,46 +1,82 @@
 <template>
-  <div id="backdrop" @click="closeOnBackdropClick" class="backdrop">
-    <OrderForm v-if="isModal === 'order'" />
-    <slot></slot>
+  <div class="backdrop">
+    <div class="modal">
+      <div class="modal-item"></div>
+      <button @click="toCloseModal" class="button-style">
+        <img src="../../assets/images/close.svg" alt="close" />
+      </button>
+      <ReviewsForm v-if="isModal === 'ReviewsForm'" />
+      <BookApartmentForm v-if="isModal === 'BookApartmentForm'" />
+    </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import OrderForm from "./OrderForm.vue";
+import ReviewsForm from "../ReviewsForm";
+import BookApartmentForm from "../BookApartmentForm";
 export default {
-  components: { OrderForm },
   name: "ModalWindow",
+  components: { ReviewsForm, BookApartmentForm },
   methods: {
-    ...mapActions("modal", ["setModal"]),
-    onEspcapeClose(e) {
-      if (e.key === "Escape") {
-        this.setModal(false);
-      }
-    },
-    closeOnBackdropClick(e) {
-      if (e.target.id === "backdrop") {
-        this.setModal(false);
+    ...mapActions("modal", ["toggleModalWindow"]),
+    toCloseModal(event) {
+      if (event.key === "Alt" || event.type === "click") {
+        this.toggleModalWindow(false);
       }
     }
   },
   computed: {
     ...mapGetters("modal", ["isModal"])
   },
-  created() {
-    document.body.addEventListener("keydown", this.onEspcapeClose);
+  mounted() {
+    window.addEventListener("keyup", this.toCloseModal);
   },
   destroyed() {
-    document.body.removeEventListener("keydown", this.onEspcapeClose);
+    window.removeEventListener("keyup", this.toCloseModal);
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .backdrop {
-  position: fixed;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.651);
+  background-color: rgba(23, 21, 21, 0.502);
+  position: absolute;
+  z-index: 100;
+}
+.modal {
+  position: absolute;
+  box-shadow: 13px 11px 22px 1px rgba(0, 0, 0, 0.6);
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  @media (max-width: 1125px) {
+    /* left: 0;
+    top: 0; */
+    width: 100%;
+    height: 100%;
+    position: fixed;
+  }
+}
+.button-style {
+  position: absolute;
+  z-index: 99;
+  top: 20px;
+  right: 20px;
+  border: none;
+  margin: 0;
+  padding: 3px;
+  width: auto;
+  overflow: visible;
+  cursor: pointer;
+  background: transparent;
+}
+.button-style:focus {
+  outline: none;
 }
 </style>

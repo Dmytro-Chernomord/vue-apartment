@@ -4,6 +4,7 @@ import user from "./user";
 import apartments from "./apartments";
 import loader from "./loader";
 import modal from "./modal";
+import orderApartment from "./orderApartment";
 
 import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex);
@@ -14,6 +15,6 @@ export default new Vuex.Store({
   state: {},
   mutations: {},
   actions: {},
-  modules: { user, apartments, loader, modal },
+  modules: { user, apartments, loader, modal, orderApartment },
   plugins: [persistedState]
 });

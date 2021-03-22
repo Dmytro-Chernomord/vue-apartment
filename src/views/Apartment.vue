@@ -72,11 +72,10 @@ export default {
   },
   methods: {
     bookAparment() {
-      console.log("book");
-      this.setModal("order");
+      this.toggleModalWindow("BookApartmentForm");
     },
     ...mapActions("apartments", ["fetchOneApartment"]),
-    ...mapActions("modal", ["setModal"])
+    ...mapActions("modal", ["toggleModalWindow"])
   }
 };
 </script>
