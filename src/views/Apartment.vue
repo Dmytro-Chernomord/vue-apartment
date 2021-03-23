@@ -21,7 +21,10 @@
       <div class="apartment-price">Preis: {{ priceToLocale }}</div>
       <div class="apartment-reviews">
         <h3>Reviews:</h3>
-        <ul v-if="apartment.reviews && apartment.reviews.length">
+        <ul
+          class="apartment-list"
+          v-if="apartment.reviews && apartment.reviews.length"
+        >
           <li
             class="apartment-review"
             v-for="el of apartment.reviews"
@@ -109,6 +112,11 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 25px 10px;
+  }
+  &-list {
+    height: 300px;
+    overflow: scroll;
+    padding: 0 10px;
   }
   &-owner > ul > li:not(:last-child) {
     margin-bottom: 10px;
