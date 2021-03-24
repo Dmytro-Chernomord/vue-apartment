@@ -11,7 +11,6 @@
       :imgSrc="imgUrl"
       class="apartments-list__item"
     />
-    {{ isLoading }}
   </div>
   <h1 v-else-if="!isLoading">No Appartment</h1>
 </template>
